@@ -101,9 +101,9 @@ class AlbumService
                     ]);
                 }
             }
-        }
-        if(isset($request->move_with_delete)){
-            return $this->delete($album->id);
+            if(isset($request->move_with_delete)){
+                return $this->delete($album->id);
+            }
         }
         return $album;
     }
