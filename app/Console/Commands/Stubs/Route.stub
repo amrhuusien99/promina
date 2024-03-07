@@ -1,0 +1,17 @@
+    
+        // $FILEVARSINQULAR routes
+        Route::get('$NORMALNAME/index/{offset?}/{limit?}', '$FILENAMEUSSINQULARController@index')->name('admin/$NORMALNAME/index');
+        Route::get('$NORMALNAME/create', '$FILENAMEUSSINQULARController@create')->name('admin/$NORMALNAME/create');
+        Route::post('$NORMALNAME/create', '$FILENAMEUSSINQULARController@store')->name('admin/$NORMALNAME/store');
+        Route::get('$NORMALNAME/edit/{id?}', '$FILENAMEUSSINQULARController@edit')->name('admin/$NORMALNAME/edit');
+        Route::post('$NORMALNAME/edit/{id}', '$FILENAMEUSSINQULARController@update')->name('admin/$NORMALNAME/update');
+        Route::get('$NORMALNAME/activate', '$FILENAMEUSSINQULARController@activate')->name('admin/$NORMALNAME/activate');
+        Route::get('$NORMALNAME/delete', '$FILENAMEUSSINQULARController@delete')->name('admin/$NORMALNAME/delete');
+        Route::post('$NORMALNAME/pagination/{offset?}/{limit?}', '$FILENAMEUSSINQULARController@pagination')->name('admin/$NORMALNAME/pagination');
+        Route::post('$NORMALNAME/search', '$FILENAMEUSSINQULARController@search')->name('admin/$NORMALNAME/search');
+        Route::get('$NORMALNAME/archives/{offset?}/{limit?}', '$FILENAMEUSSINQULARController@archives')->name('admin/$NORMALNAME/archives');
+        Route::get('$NORMALNAME/back', '$FILENAMEUSSINQULARController@back')->name('admin/$NORMALNAME/back');
+        Route::post('$NORMALNAME/pagination/archives/{offset?}/{limit?}', '$FILENAMEUSSINQULARController@archivesPagination')->name('admin/$NORMALNAME/pagination/archives');
+        Route::post('$NORMALNAME/search/archives', '$FILENAMEUSSINQULARController@archivesSearch')->name('admin/$NORMALNAME/search/archives');
+
+        //ROUTEFROMCOMMANDLINE

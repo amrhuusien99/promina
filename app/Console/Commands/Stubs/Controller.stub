@@ -1,0 +1,127 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Http\Repositories\Eloquent\Admin\$NAMERepository;
+use App\Http\Requests\Admin\$NAMERequests\$NAMEStoreRequest;
+use App\Http\Requests\Admin\$NAMERequests\$NAMEUpdateRequest;
+
+class $NAMEController extends Controller
+{
+
+    public $$NORMALNAME;
+
+    public function __construct($NAMERepository $$NORMALNAME)
+    {
+        $this->$NORMALNAME = $$NORMALNAME;
+    }
+
+    public function index($offset, $limit)
+    {
+        try{
+            return $this->$NORMALNAME->index($offset, $limit);
+        }catch(\Exception $e){
+            flash()->error('There is something wrong , please contact technical support');
+            return back();
+        }
+    }
+
+    public function create()
+    {
+        return $this->$NORMALNAME->create();
+    }
+
+    public function store($NAMEStoreRequest $request)
+    {
+        try{
+            $this->$NORMALNAME->store($request);
+            flash()->success('Success');
+            return back();
+        }catch(\Exception $e){
+            flash()->error('There is something wrong , please contact technical support');
+            return back();
+        }
+    }
+
+    public function edit($id)
+    {
+        return $this->$NORMALNAME->edit($id);
+    }
+
+    public function update($NAMEUpdateRequest $request, $id)
+    {
+        try{
+            $this->$NORMALNAME->update($request, $id);
+            flash()->success('Success');
+            return back();
+        }catch(\Exception $e){
+            flash()->error('There is something wrong , please contact technical support');
+            return back();
+        }
+    }
+
+    public function activate(Request $request)
+    {
+        try{
+            $this->$NORMALNAME->activate($request->record_id);
+            flash()->success('Success');
+            return back();
+        }catch(\Exception $e){
+            flash()->error('There is something wrong , please contact technical support');
+            return back();
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        try{
+            $this->$NORMALNAME->delete($request->record_id);
+            flash()->success('Success');
+            return back();
+        }catch(\Exception $e){
+            flash()->error('There is something wrong , please contact technical support');
+            return back();
+        }
+    }
+
+    public function search(Request $request)
+    {
+        return $this->$NORMALNAME->search($request);
+    }
+
+    public function pagination($offset, $limit)
+    {
+        return $this->$NORMALNAME->pagination($offset, $limit);
+    }
+
+    public function archives($offset, $limit)
+    {
+        return $this->$NORMALNAME->archivesPage($offset, $limit);
+    }
+
+    public function archivesPagination($offset, $limit)
+    {
+        return $this->$NORMALNAME->archives($offset, $limit);
+    }
+
+    public function archivesSearch(Request $request)
+    {
+        return $this->$NORMALNAME->archivesSearch($request);
+    }
+
+
+    public function back(Request $request)
+    {
+        try{
+            $this->$NORMALNAME->back($request->record_id);
+            flash()->success('Success');
+            return back();
+        }catch(\Exception $e){
+            flash()->error('There is something wrong , please contact technical support');
+            return back();
+        }
+    }
+
+}
