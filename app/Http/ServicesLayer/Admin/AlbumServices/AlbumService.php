@@ -3,6 +3,7 @@
 namespace App\Http\ServicesLayer\Admin\AlbumServices;
 
 use App\Models\Album;
+use Illuminate\Support\Facades\File;
 
 class AlbumService
 {
@@ -19,10 +20,13 @@ class AlbumService
         if (isset($request->images)) {
             foreach ($request->images as $record) {
                 
-                $album->album_images()->create([
-                    'name' => $record['name'] ?? '',
-                    'img' => uploadIamge($record['image'], 'albums') // function on helper file to upload file
-                ]);
+                if(isset($record['image']) && !is_null($record['image'])){
+
+                    $album->album_images()->create([
+                        'name' => $record['name'] ?? '',
+                        'img' => uploadIamge($record['image'], 'albums') // function on helper file to upload file
+                    ]);
+                }
             }
         }
         return $album;
@@ -65,13 +69,42 @@ class AlbumService
         $album = $this->model->find($id);
         if ($album->album_images->count()) {
 
-            $imagesPath = array_column($album->album_images->toArray(), 'img');
-            foreach ($imagesPath as $path) {
-                if (file_exists($path)) {
-                    unlink($path);
+            // $imagesPath = array_column($album->album_images->toArray(), 'img');
+            foreach ($album->album_images as $image) {
+                if (file_exists($image->img)) {
+                    unlink($image->img);
                 }
+                $image->delete();
             }
         }
         return $album->delete();
+    }
+
+    function movePictures($request, $id)
+    {
+
+        $album = $this->model->find($id);
+        $futureAlbum = $this->model->find($request->album_id);
+        if ($album->album_images->count() && $futureAlbum) {
+            
+            foreach ($album->album_images as $image) {
+                if($image->img){
+
+                    // make new image for future album
+                    $newFileName = hash('md5', pathinfo($image->img, PATHINFO_FILENAME)).'.'.pathinfo($image->img, PATHINFO_EXTENSION);
+                    $destinationPath = 'admin/assets/images/albums/' . $newFileName;                    
+                    File::copy($image->img, public_path($destinationPath));
+
+                    $futureAlbum->album_images()->create([
+                        'name' => $image->name ?? '',
+                        'img' => $destinationPath // function on helper file to upload file
+                    ]);
+                }
+            }
+        }
+        if(isset($request->move_with_delete)){
+            return $this->delete($album->id);
+        }
+        return $album;
     }
 }

@@ -26,7 +26,7 @@ class AlbumStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:254|unique:albums,name',
             'images.*.name' => 'nullable|max:254',
-            'images.*.image' => 'required|mimes:png,jpg,jpeg,webm,webp|max:2049',
+            'images.*.image' => 'nullable|mimes:png,jpg,jpeg,webm,webp|max:2049',
         ];
     }
 }

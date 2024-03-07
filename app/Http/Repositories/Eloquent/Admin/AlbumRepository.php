@@ -56,9 +56,14 @@ class AlbumRepository extends AbstractRepository
         return view('admin.albums.archives', compact('albums'));
     }
 
-    function deleteWithImages($id)
+    public function deleteWithImages($id)
     {
         return $this->albumServices->delete($id);
+    }
+
+    public function movePictures($request, $id)
+    {
+        return $this->albumServices->movePictures($request, $id);
     }
 
 }

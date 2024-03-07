@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([ 'namespace' => 'App\Http\Controllers\Admin'], function() {
     
     Route::get('/', 'HomeController@home')->name('admin/index');
+    Route::get('get/albums', 'HomeController@albums')->name('get/albums');
 
         
         // album routes
@@ -32,6 +33,7 @@ Route::group([ 'namespace' => 'App\Http\Controllers\Admin'], function() {
         Route::get('albums/back', 'AlbumController@back')->name('admin/albums/back');
         Route::post('albums/pagination/archives/{offset?}/{limit?}', 'AlbumController@archivesPagination')->name('admin/albums/pagination/archives');
         Route::post('albums/search/archives', 'AlbumController@archivesSearch')->name('admin/albums/search/archives');
+        Route::post('albums/move-pictures/{id}', 'AlbumController@movePictures')->name('admin/albums/move-pictures');
 
         
       //ROUTEFROMCOMMANDLINE

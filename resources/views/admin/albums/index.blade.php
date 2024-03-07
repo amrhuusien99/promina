@@ -53,6 +53,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Activation</th>
+                                    <th>Move Pictures</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -67,6 +68,27 @@
                                                 else{$activate = '<span class="badge badge-danger">un active</span>';}
                                             ?>
                                             <td class="center">{!! $activate !!}</td>
+                                            <td>
+                                                @if(count($album->album_images))
+                                                    <form role="form" action="{{url(route('admin/albums/move-pictures', $album->id))}}" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="album_id" id="albums" aria-controls="dataTables-example" style="width: 220px">
+                                                                    <option value="">Albums</option>
+                                                                </select>
+                                                                <div class="form-group form-check form-switch">
+                                                                    <input name="move_with_delete" value="1" class="form-check-input" type="checkbox" id="move_with_delete">
+                                                                    <label class="form-check-label" for="move_with_delete">Move With Delete</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <button class="btn btn-primary" type="submit">Move</button>
+                                                        </div>
+                                                    </form>
+                                                @endif  
+                                            </td>
                                             <td class="center">
                                                 <ul class="nav navbar-center navbar-top-links" style="border-radius: 15px;">
                                                     <li class="dropdown">
@@ -171,6 +193,29 @@
         $(document).on('click', '.openActivationFrom', function() {
             var id = $(this).attr('data-id');
             $('#activation_record_id').val(id);
+        });
+
+        $('#albums').select2({
+            ajax: {
+                url: "{{ route('get/albums') }}",
+                dataType: 'json',
+                data: function(params) {
+                    return {
+                        q: params.term,
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (item) {
+                            return {
+                                id: item.id,
+                                text: item.name
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
         });
     </script>
     <script>

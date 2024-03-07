@@ -46,7 +46,7 @@ class Album extends Model
 
 	public function model_relations()
 	{
-		return [];
+		return ['album_images'];
 	}
 
 	public function album_images()

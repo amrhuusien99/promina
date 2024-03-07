@@ -128,4 +128,16 @@ class AlbumController extends Controller
         }
     }
 
+    public function movePictures(Request $request, $id)
+    {
+        try{
+            $this->albums->movePictures($request, $id);
+            flash()->success('Success');
+            return back();
+        }catch(\Exception $e){
+            flash()->error('There is something wrong , please contact technical support');
+            return back();
+        }
+    }
+
 }

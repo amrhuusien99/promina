@@ -75,7 +75,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-2">
-                                            <button type="button" class="btn btn-danger">-</button>
+                                            <button type="button" onclick="removeImage('.imageComponentArea-1')" class="btn btn-danger">-</button>
                                         </div>
                                     </div>
                                 </div>
