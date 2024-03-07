@@ -97,7 +97,7 @@ class AlbumService
 
                     $futureAlbum->album_images()->create([
                         'name' => $image->name ?? '',
-                        'img' => $destinationPath // function on helper file to upload file
+                        'img' => $destinationPath 
                     ]);
                 }
             }
